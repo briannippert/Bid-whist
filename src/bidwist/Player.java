@@ -32,35 +32,32 @@ public class Player {
     public Card play() {
         return null;
     }
-    public void setLocation(int x, int y)
-    {
-        for(Card c : _hand)
-        {
-        c.setLocation(x, y);
+
+    public void setLocation(int x, int y) {
+        for (Card c : _hand) {
+            c.setLocation(x, y);
         }
     }
-    public void turnOver()
-    {
-     for(Card c: _hand)
-     {
-         c.setFaceUp(true);
-         
-     }
+
+    public void turnOver() {
+        for (Card c : _hand) {
+            c.setFaceUp(true);
+
+        }
     }
-    
-    public void setLocationOffset(int startX, int startY, int offsetX, int offsetY)
-    {
+
+    public void setLocationOffset(int startX, int startY, int offsetX, int offsetY) {
         int offX = offsetX;
         int offY = offsetY;
-        for(Card c : _hand)
-        {
-            c.setLocation(startX + offX , startY + offY);
+        for (Card c : _hand) {
+            c.setLocation(startX + offX, startY + offY);
             offX += offsetX;
             offY += offsetY;
-            System.out.println("Card Location Set: X:" +(startX + offX) + " Y:" + (startY + offY) );
+            System.out.println("Card Location Set: X:" + (startX + offX) + " Y:" + (startY + offY));
             c.repaint();
         }
     }
+
     public boolean getDealer() {
         return _dealer;
     }
@@ -69,4 +66,3 @@ public class Player {
         _dealer = dealer;
     }
 }
-
