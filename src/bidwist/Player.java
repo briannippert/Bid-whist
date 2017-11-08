@@ -40,7 +40,25 @@ public class Player {
      * @return
      */
     public int bid() {
-        return 0;
+        int points, hearts, clubs, spades;
+        for (Card c : _hand) {
+            if (c.getSuit() == Card.Suit.CLUBS) {
+
+            }
+            if (c.getSuit() == Card.Suit.DIAMONDS) {
+
+            }
+            if (c.getSuit() == Card.Suit.HEARTS) {
+
+            }
+            if (c.getSuit() == Card.Suit.SPADES) {
+
+            }
+            if (c.getSuit() == Card.Suit.JOKER) {
+
+            }
+        }
+        return 0;     //HMMM how to do this
     }
 
     /**
