@@ -39,25 +39,53 @@ public class Player {
      * @return
      */
     public int bid() {
-        int points, hearts, clubs, spades;
+        int points = 0, hearts = 0, clubs = 0, spades = 0, diamonds = 0, jokers = 0;
+        int spadesCount = 0, diamondsCount = 0, heartsCount = 0, clubsCount = 0, jokersCount = 0;
         for (Card c : _hand) {
             if (c.getSuit() == Card.Suit.CLUBS) {
-
+                clubsCount++;
+                clubs += c.getRank().ordinal();
             }
             if (c.getSuit() == Card.Suit.DIAMONDS) {
-
+                diamondsCount++;
+                diamonds += c.getRank().ordinal();
             }
             if (c.getSuit() == Card.Suit.HEARTS) {
-
+                heartsCount++;
+                hearts += c.getRank().ordinal();
             }
             if (c.getSuit() == Card.Suit.SPADES) {
-
+                spadesCount++;
+                spades = c.getRank().ordinal();
             }
             if (c.getSuit() == Card.Suit.JOKER) {
-
+                jokersCount++;
+                jokers += 15;
             }
         }
-        return 0;     //HMMM how to do this
+        System.out.println("Spades: " + spadesCount + " Points: " + spades);
+        System.out.println("Diamonds: " + diamondsCount + " Points: " + diamonds);
+        System.out.println("Clubs: " + clubsCount + " Points: " + clubs);
+        System.out.println("Hearts: " + heartsCount + " Points: " + hearts);
+        System.out.println("Jokers: " + jokersCount + " Points: " + jokers);
+        if (clubsCount < 5) {
+            clubs = 0;
+        }
+        if (diamondsCount < 5) {
+            diamonds = 0;
+        }
+        if (heartsCount < 5) {
+            hearts = 0;
+        }
+        if (spades < 5) {
+            spades = 0;
+        }
+        points = (clubs + hearts + spades + diamonds + jokers) / 9;
+        if (points < 4) {
+            return 0;
+        } else {
+            return points;
+        }
     }
 
     /**

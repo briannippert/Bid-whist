@@ -143,6 +143,8 @@ public class GUI extends javax.swing.JFrame {
         btnBid.setVisible(true);
         sldBid.setVisible(true);
         btnPass.setVisible(true);
+        int p3Bid = _players.get(3).bid();
+        System.out.println("Player 3 Bid: " + p3Bid);
     }
 
     /**
@@ -266,7 +268,7 @@ public class GUI extends javax.swing.JFrame {
         createPlayers();
         _players.get(3).orderCards();
         startGame();
-        
+
         //  validate();
         //   repaint();
 
