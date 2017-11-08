@@ -24,6 +24,13 @@ import java.util.ArrayList;
  */
 public class Rules {
 
+    
+    /**
+     * Analyzes 4 cards to determine the winner. 
+     * @param cards Arraylist Of Cards that have been played
+     * @param trump Suit that Trump represents
+     * @return 
+     */
     public static Card analyzeTrick(ArrayList<Card> cards, Card.Suit trump) {
         return null;
     }
