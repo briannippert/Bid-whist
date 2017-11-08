@@ -7,6 +7,7 @@ package bidwist;
 
 import java.awt.Container;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Level;
@@ -17,7 +18,7 @@ import java.util.logging.Logger;
  * @author Brian
  */
 public class Player {
-    
+
     ArrayList<Card> _hand;
     Container _parent;
     int _bid;
@@ -33,7 +34,7 @@ public class Player {
         _hand = hand;
         _dealer = false;
         _parent = parent;
-        
+
     }
 
     /**
@@ -45,19 +46,19 @@ public class Player {
         int points, hearts, clubs, spades;
         for (Card c : _hand) {
             if (c.getSuit() == Card.Suit.CLUBS) {
-                
+
             }
             if (c.getSuit() == Card.Suit.DIAMONDS) {
-                
+
             }
             if (c.getSuit() == Card.Suit.HEARTS) {
-                
+
             }
             if (c.getSuit() == Card.Suit.SPADES) {
-                
+
             }
             if (c.getSuit() == Card.Suit.JOKER) {
-                
+
             }
         }
         return 0;     //HMMM how to do this
@@ -83,39 +84,52 @@ public class Player {
             c.setLocation(x, y);
         }
     }
-    
+
     public void orderCards() {
-        List<Card> jokers, spades, hearts, clubs, diamonds;
+        ArrayList<Card> jokers, spades, hearts, clubs, diamonds, temp;
         jokers = new ArrayList<Card>();
         spades = new ArrayList<Card>();
         hearts = new ArrayList<Card>();
         clubs = new ArrayList<Card>();
+        temp = new ArrayList<Card>();
         diamonds = new ArrayList<Card>();
         for (Card c : _hand) {
             if (c.getSuit() == Card.Suit.CLUBS) {
-                _hand.remove(c);
                 clubs.add(c);
             }
             if (c.getSuit() == Card.Suit.DIAMONDS) {
-                _hand.remove(c);
                 diamonds.add(c);
             }
             if (c.getSuit() == Card.Suit.HEARTS) {
-                _hand.remove(c);
                 hearts.add(c);
             }
             if (c.getSuit() == Card.Suit.SPADES) {
-                _hand.remove(c);
                 spades.add(c);
             }
             if (c.getSuit() == Card.Suit.JOKER) {
-                _hand.remove(c);
                 jokers.add(c);
             }
         }
+        for (Card c : jokers) {
+            if (c.getRank() == Card.Rank.LITTLE_JOKER) {
+
+            } else if (c.getRank() == Card.Rank.BIG_JOKER) {
+                jokers.add(0, c);
+                jokers.remove(c);
+            }
+        }
+        Collections.sort(spades);
+        Collections.sort(clubs);
+        Collections.sort(hearts);
+        Collections.sort(diamonds);
+        _hand.clear();
+        _hand.addAll(jokers);
+        _hand.addAll(spades);
+        _hand.addAll(hearts);
+        _hand.addAll(clubs);
+        _hand.addAll(diamonds);
 
     }
-
     /**
      * turns over players hand.
      */
@@ -142,7 +156,7 @@ public class Player {
             c.setLocation(startX + offX, startY + offY);
             offX += offsetX;
             offY += offsetY;
-            
+
         }
     }
 
@@ -176,6 +190,6 @@ public class Player {
         } else {
             return false;
         }
-        
+
     }
 }
