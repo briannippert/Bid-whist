@@ -82,6 +82,27 @@ public class Player {
         }
     }
 
+    public void orderCards() {
+        ArrayList<Card> jokers, spades, hearts, clubs, dimonds;
+        for (Card c : _hand) {
+            if (c.getSuit() == Card.Suit.CLUBS) {
+
+            }
+            if (c.getSuit() == Card.Suit.DIAMONDS) {
+
+            }
+            if (c.getSuit() == Card.Suit.HEARTS) {
+
+            }
+            if (c.getSuit() == Card.Suit.SPADES) {
+
+            }
+            if (c.getSuit() == Card.Suit.JOKER) {
+
+            }
+        }
+    }
+
     /**
      * turns over players hand.
      */
