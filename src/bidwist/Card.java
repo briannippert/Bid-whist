@@ -68,7 +68,7 @@ public class Card extends JLabel implements Comparable<Card>, MouseListener {
     private Rank rank = null;
     private Suit suit = null;
     private BufferedImage faceImage;
-    private CardGroup groupRef;
+   
     private boolean _faceUp = false;
     private ArrayList<MouseListener> _listeners = null;
 
@@ -337,27 +337,6 @@ public class Card extends JLabel implements Comparable<Card>, MouseListener {
     public Rank getRank() {
         return rank;
     }
-
-    // --------------------- setGroup ------------------------
-    /**
-     * set the stack containing this card.
-     *
-     * @param g CardGroup
-     */
-    public void setGroup(CardGroup g) {
-        this.groupRef = g;
-    }
-
-    // --------------------- getGroup ------------------------
-    /**
-     * return a reference to the CardGroup containing this card.
-     *
-     * @return CardGroup the current stack
-     */
-    public CardGroup getGroup() {
-        return this.groupRef;
-    }
-
     // -------------------- paintComponent ------------------------
     /**
      * paintComponent draws the card as either face up or face down.
