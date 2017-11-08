@@ -47,6 +47,9 @@ public class GUI extends javax.swing.JFrame {
         _kitty = new ArrayList();
         for (Card.Suit suit : Card.Suit.values()) {
             for (Card.Rank rank : Card.Rank.values()) {
+                if (rank == Card.Rank.BIG_JOKER || rank == Card.Rank.LITTLE_JOKER || suit == Card.Suit.JOKER) {
+                    break;
+                }
                 if (rank != Card.Rank.A_HI) {
                     Card card = new Card(rank, suit);
                     card.addListener((MouseListener) _cardListener);
@@ -57,11 +60,11 @@ public class GUI extends javax.swing.JFrame {
                 }
             }
         }
-        Card card = new Card("jr");
+        Card card = new Card(Card.Rank.LITTLE_JOKER, Card.Suit.JOKER);
         card.addListener((MouseListener) _cardListener);
         _baseDeck.add(0, card);
         this.add(card);
-        card = new Card("jb");
+        card = new Card(Card.Rank.BIG_JOKER, Card.Suit.JOKER);
         card.addListener((MouseListener) _cardListener);
         _baseDeck.add(0, card);
         this.add(card);
@@ -73,7 +76,7 @@ public class GUI extends javax.swing.JFrame {
             ArrayList<Card> tempDeck = new ArrayList();
             if (i != 4) {
                 for (int j = _baseDeck.size() - 1; j >= numCards; j--) {
-                   
+
                     tempDeck.add(_baseDeck.get(j));
                     _baseDeck.remove(j);
 
@@ -266,15 +269,13 @@ public class GUI extends javax.swing.JFrame {
 //        System.out.println("Card Suite: " + card.getSuit().toString() + "\nCard Rank: " + card.getRank().toString());
         loc.x = loc.x + card.getX();;
         loc.y = loc.y + card.getY();
-        if( card.getFaceUp() == false)
-        { card.setFaceUp(true);
-       
-        }
-        else
-        {
+        if (card.getFaceUp() == false) {
+            card.setFaceUp(true);
+
+        } else {
             card.setFaceUp(false);
         }
-       super.repaint();
+        super.repaint();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;

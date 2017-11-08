@@ -39,18 +39,18 @@ public class Card extends JLabel implements Comparable<Card>, MouseListener {
     private static BufferedImage backImage = null;
     private static JarFile jarFile = null; // rep jar file if used
     private static String[] suitChar
-            = {"C", "D", "H", "S"};
+            = {"C", "D", "H", "S", "J"};
     private static String[] rankCharAceHi
-            = {"2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K", "A"};
+            = {"2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K", "A", "LJ", "BJ"};
     private static String[] rankCharAceLo
-            = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K"};
+            = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K", "LJ", "BJ"};
 
     // ---------------------- Suit enum definition --------------------
     /**
      * enum Suit used for the suit of a card.
      */
     public static enum Suit {
-        CLUBS, DIAMONDS, HEARTS, SPADES
+        CLUBS, DIAMONDS, HEARTS, SPADES, JOKER
     }
 
     // -------------------- Rank enum definition -----------------------
@@ -60,7 +60,7 @@ public class Card extends JLabel implements Comparable<Card>, MouseListener {
     public enum Rank // symbolic names for the 13 cards
     {
         A_LO, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN,
-        JACK, QUEEN, KING, A_HI
+        JACK, QUEEN, KING, A_HI, LITTLE_JOKER, BIG_JOKER
     };
 
     // -------------------------- instance variables -----------------
@@ -79,6 +79,34 @@ public class Card extends JLabel implements Comparable<Card>, MouseListener {
      * @param s Suit Hearts, Clubs, etc.
      */
     public Card(Rank r, Suit s) {
+        if (r == Rank.LITTLE_JOKER || r == Rank.BIG_JOKER) {
+            if (s == Suit.JOKER) {
+                this.setSize(width, height);
+                suit = Suit.JOKER;
+                addMouseListener(this);
+                _listeners = new ArrayList<MouseListener>();
+
+                if (backImage == null) // only read the backImage once
+                {
+                    readBackImage(imageSource);
+                }
+
+                String cardFileName;
+                if (r == Rank.LITTLE_JOKER) {
+                    rank = Rank.LITTLE_JOKER;
+                    cardFileName = "jr.gif";
+                } else if (r == Rank.BIG_JOKER) {
+                    rank = Rank.BIG_JOKER;
+                    cardFileName = "jb.gif";
+                } else {
+                    cardFileName = "error";
+                }
+
+                faceImage = readCardImage(imageSource, cardFileName);
+                return;
+            }
+            return;
+        }
         rank = r;
         suit = s;
         this.setSize(width, height);
@@ -103,32 +131,30 @@ public class Card extends JLabel implements Comparable<Card>, MouseListener {
         faceImage = readCardImage(imageSource, cardFileName);
     }
 
-    public Card(String jockerCd) {
-        this.setSize(width, height);
-
-        addMouseListener(this);
-        _listeners = new ArrayList<MouseListener>();
-
-        if (backImage == null) // only read the backImage once
-        {
-            readBackImage(imageSource);
-        }
-
-        String cardFileName;
-       if(jockerCd == "jr")
-       {
-                     
-            cardFileName = "jr.gif";
-       }
-       else if(jockerCd == "jb")
-       {
-           cardFileName = "jb.gif";
-       }
-       else
-           cardFileName = "error";
-           
-        faceImage = readCardImage(imageSource, cardFileName);
-    }
+//    public Card(String jockerCd) {
+//        this.setSize(width, height);
+//        suit = Suit.JOKER;
+//        addMouseListener(this);
+//        _listeners = new ArrayList<MouseListener>();
+//
+//        if (backImage == null) // only read the backImage once
+//        {
+//            readBackImage(imageSource);
+//        }
+//
+//        String cardFileName;
+//        if (jockerCd == "jr") {
+//            rank = Rank.LITTLE_JOKER;
+//            cardFileName = "jr.gif";
+//        } else if (jockerCd == "jb") {
+//            rank = Rank.BIG_JOKER;
+//            cardFileName = "jb.gif";
+//        } else {
+//            cardFileName = "error";
+//        }
+//
+//        faceImage = readCardImage(imageSource, cardFileName);
+//    }
 
     // ---------------------- getAceHiFileName ------------------------
     /**
@@ -143,10 +169,10 @@ public class Card extends JLabel implements Comparable<Card>, MouseListener {
      */
     public String getAceHiFileName(Suit s, Rank r) {
         String[] suitPrefix
-                = {"c", "d", "h", "s"};
+                = {"c", "d", "h", "s", "j"};
         String[] rankSuffix
                 = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13",
-                    "1"};
+                    "1", "14", "15"};
 
         return suitPrefix[s.ordinal()] + rankSuffix[r.ordinal()] + ".gif";
     }
@@ -164,10 +190,10 @@ public class Card extends JLabel implements Comparable<Card>, MouseListener {
      */
     public String getAceLoFileName(Suit s, Rank r) {
         String[] suitPrefix
-                = {"c", "d", "h", "s"};
+                = {"c", "d", "h", "s", "j"};
         String[] rankSuffix
                 = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12",
-                    "13"};
+                    "13", "14", "15"};
 
         return suitPrefix[s.ordinal()] + rankSuffix[r.ordinal()] + ".gif";
     }

@@ -53,10 +53,10 @@ public class Player {
         int offX = offsetX;
         int offY = offsetY;
         for (Card c : _hand) {
-//            int xpos = startX + offX;
-//            int ypos = startY + offY;
+            int xpos = startX + offX;
+            int ypos = startY + offY;
 //            System.out.println("X Position: " +xpos);
-//            System.out.println("Y Position: " +ypos);
+       //     System.out.println(c.getRank().toString() + c.getSuit()+ " At: " + xpos +","+ ypos);
             c.setLocation(startX + offX, startY + offY);
             offX += offsetX;
             offY += offsetY;
