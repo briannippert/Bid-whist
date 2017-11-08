@@ -114,7 +114,7 @@ public class GUI extends javax.swing.JFrame {
         _players = new ArrayList();
         for (int i = 0; i < 4; i++) {
 
-            Player p1 = new Player(_deck.get(i));
+            Player p1 = new Player(_deck.get(i), this);
             _players.add(p1);
         }
 

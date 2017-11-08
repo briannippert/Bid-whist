@@ -56,8 +56,10 @@ public class Player {
             c.setLocation(startX + offX, startY + offY);
             offX += offsetX;
             offY += offsetY;
+            _parent.setComponentZOrder(c,0);
+           // c.repaint();
         //    System.out.println("Card Location Set: X:" + (startX + offX) + " Y:" + (startY + offY));
-            c.repaint();
+            
         }
     }
 
