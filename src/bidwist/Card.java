@@ -155,6 +155,9 @@ public class Card extends JLabel implements Comparable<Card>, MouseListener {
 //
 //        faceImage = readCardImage(imageSource, cardFileName);
 //    }
+    public void SetLocation(int x, int y) {
+        this.setLocation(x, y);
+    }
 
     // ---------------------- getAceHiFileName ------------------------
     /**
@@ -335,7 +338,7 @@ public class Card extends JLabel implements Comparable<Card>, MouseListener {
      *
      * @param brush java.awt.Graphics
      */
-    public void paintComponent(java.awt.Graphics brush) {
+    public void paintComponent(Graphics brush) {
         super.paintComponent(brush);
         Graphics2D brush2 = (Graphics2D) brush;
         if (_faceUp) {
