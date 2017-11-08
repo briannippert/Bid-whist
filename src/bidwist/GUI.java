@@ -33,8 +33,9 @@ public class GUI extends javax.swing.JFrame {
      */
     public GUI() {
         initComponents();
-    
-
+        btnBid.setVisible(false);
+        sldBid.setVisible(false);
+        btnPass.setVisible(false);
     }
 
     /**
@@ -130,11 +131,14 @@ public class GUI extends javax.swing.JFrame {
         for (Card c : _kitty) {
             c.setLocation(325, 262);
         }
-        _players.get(0).setLocationOffset(630, 120, 0, 20);
-        _players.get(1).setLocationOffset(20, 120, 0, 20);
-        _players.get(2).setLocationOffset(10, 25, 50, 0);
-        _players.get(3).setLocationOffset(10, 500, 50, 0);
+        _players.get(0).setLocationOffset(630, 150, 0, 20);
+        _players.get(1).setLocationOffset(20, 150, 0, 20);
+        _players.get(2).setLocationOffset(10, 60, 50, 0);
+        _players.get(3).setLocationOffset(10, 540, 50, 0);
         _players.get(3).turnOver();
+        btnBid.setVisible(true);
+        sldBid.setVisible(true);
+        btnPass.setVisible(true);
     }
 
     /**
@@ -146,6 +150,9 @@ public class GUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        sldBid = new javax.swing.JSlider();
+        btnBid = new javax.swing.JButton();
+        btnPass = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         javax.swing.JMenuItem menuStartGame = new javax.swing.JMenuItem();
@@ -154,6 +161,19 @@ public class GUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Bidwist");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        sldBid.setMajorTickSpacing(1);
+        sldBid.setMaximum(7);
+        sldBid.setMinimum(4);
+        sldBid.setMinorTickSpacing(1);
+        sldBid.setPaintLabels(true);
+        sldBid.setPaintTicks(true);
+        sldBid.setToolTipText("");
+        sldBid.setValue(4);
+
+        btnBid.setText("Bid");
+
+        btnPass.setText("Pass");
 
         jMenu1.setText("File");
 
@@ -176,11 +196,24 @@ public class GUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 750, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(171, 171, 171)
+                .addComponent(sldBid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnBid, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnPass)
+                .addContainerGap(241, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 595, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(416, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(sldBid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBid)
+                    .addComponent(btnPass))
+                .addGap(131, 131, 131))
         );
 
         pack();
@@ -265,19 +298,20 @@ public class GUI extends javax.swing.JFrame {
         //System.out.println("Handle Card Pick Called");
         Point loc = e.getPoint(); // get coordinates of mouse event in panel
         Card card = (Card) e.getSource();
+        if (_players.get(3).hasCard(card) == true) {
+            card.toggleRaised();
+        }
 //        System.out.println("Card Suite: " + card.getSuit().toString() + "\nCard Rank: " + card.getRank().toString());
         loc.x = loc.x + card.getX();;
         loc.y = loc.y + card.getY();
-        if (card.getFaceUp() == false) {
-            card.setFaceUp(true);
-        } else {
-            card.setFaceUp(false);
-        }
-       card.repaint();
+
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBid;
+    private javax.swing.JButton btnPass;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JSlider sldBid;
     // End of variables declaration//GEN-END:variables
 }

@@ -34,6 +34,7 @@ public class Card extends JLabel implements Comparable<Card>, MouseListener {
     static String imageSource = "cards_gif.jar";
     static boolean aceHi = true; // set false to get Ace low
     static boolean blueBack = true; // set false to get red back
+    private boolean _raised = false;
 
     // --- private access
     private static BufferedImage backImage = null;
@@ -157,6 +158,31 @@ public class Card extends JLabel implements Comparable<Card>, MouseListener {
 //    }
     public void SetLocation(int x, int y) {
         this.setLocation(x, y);
+    }
+
+    /**
+     * Toggle the card to the raised state.
+     */
+    public void toggleRaised() {
+        if (_raised == false) {
+            _raised = true;
+            this.setLocation(this.getLocation().x, this.getLocation().y - 15);
+        } else {
+            _raised = false;
+            this.setLocation(this.getLocation().x, this.getLocation().y + 15);
+        }
+    }
+
+    /**
+     * returns true if the card is raised.
+     * @return 
+     */
+    public boolean getRaised() {
+        if (_raised == true) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     // ---------------------- getAceHiFileName ------------------------

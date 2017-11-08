@@ -21,6 +21,12 @@ public class Player {
     int _bid;
     boolean _dealer;
 
+    /**
+     * Constructor for the player class
+     *
+     * @param hand cards in the players hand
+     * @param parent parent object used for Z order
+     */
     public Player(ArrayList hand, Container parent) {
         _hand = hand;
         _dealer = false;
@@ -28,20 +34,39 @@ public class Player {
 
     }
 
+    /**
+     * Returns the players bid at the begining of the game
+     *
+     * @return
+     */
     public int bid() {
         return 0;
     }
 
+    /**
+     * Returns the card that the player will play. Probably will need input
+     *
+     * @return
+     */
     public Card play() {
         return null;
     }
 
+    /**
+     * sets the location of all of the players cards
+     *
+     * @param x X location of the cards
+     * @param y Y Location of the cards
+     */
     public void setLocation(int x, int y) {
         for (Card c : _hand) {
             c.setLocation(x, y);
         }
     }
 
+    /**
+     * turns over players hand.
+     */
     public void turnOver() {
         for (Card c : _hand) {
             c.setFaceUp(true);
@@ -49,6 +74,14 @@ public class Player {
         }
     }
 
+    /**
+     * Draws players cards in a line
+     *
+     * @param startX initial X position
+     * @param startY initial Y position
+     * @param offsetX X offset for each card
+     * @param offsetY Y offeset for each Card
+     */
     public void setLocationOffset(int startX, int startY, int offsetX, int offsetY) {
         int offX = offsetX;
         int offY = offsetY;
@@ -61,11 +94,36 @@ public class Player {
         }
     }
 
+    /**
+     * Returns if the player is the dealer
+     *
+     * @return true or false
+     */
     public boolean getDealer() {
         return _dealer;
     }
 
+    /**
+     * Sets if the player is the dealer.
+     *
+     * @param dealer
+     */
     public void setDealer(boolean dealer) {
         _dealer = dealer;
+    }
+
+    /**
+     * Checks to see if the player has the card
+     *
+     * @param c card to check
+     * @return true if the player has the card otherwise false.
+     */
+    public boolean hasCard(Card c) {
+        if (_hand.contains(c)) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 }
