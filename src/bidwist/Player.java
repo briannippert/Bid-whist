@@ -23,6 +23,7 @@ public class Player {
     Container _parent;
     int _bid;
     boolean _dealer;
+    Card.Suit _trump = null;
 
     /**
      * Constructor for the player class
@@ -69,7 +70,7 @@ public class Player {
      *
      * @return
      */
-    public Card play() {
+    public Card play(ArrayList<Card> hasBeenPlayed) {
         return null;
     }
 
@@ -85,6 +86,9 @@ public class Player {
         }
     }
 
+    /**
+     * Sorts cards by suit then by rank in suit.
+     */
     public void orderCards() {
         ArrayList<Card> jokers, spades, hearts, clubs, diamonds, temp;
         jokers = new ArrayList<Card>();
@@ -130,13 +134,13 @@ public class Player {
         _hand.addAll(diamonds);
 
     }
+
     /**
      * turns over players hand.
      */
     public void turnOver() {
         for (Card c : _hand) {
             c.setFaceUp(true);
-            //_parent.setComponentZOrder(c, 0);
         }
     }
 
@@ -192,4 +196,23 @@ public class Player {
         }
 
     }
+
+    /**
+     * Sets trump for the player
+     *
+     * @param suit the suit that trump has been called in.
+     */
+    public void setTrump(Card.Suit suit) {
+        _trump = suit;
+    }
+
+    /**
+     * Returns trump for the current player.
+     *
+     * @return card Suit that is trump
+     */
+    public Card.Suit getTrump() {
+        return _trump;
+    }
+
 }

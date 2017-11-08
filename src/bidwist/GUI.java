@@ -22,7 +22,7 @@ import java.util.Set;
 public class GUI extends javax.swing.JFrame {
 
     CardListener _cardListener = new CardListener();
-    int _seed = 50;
+    int _seed = new Random(10000).nextInt();
     ArrayList<ArrayList> _deck;
     ArrayList<Card> _baseDeck;
     ArrayList<Player> _players;
@@ -74,7 +74,7 @@ public class GUI extends javax.swing.JFrame {
         card.addListener((MouseListener) _cardListener);
         _baseDeck.add(0, card);
         this.add(card);
-        Collections.shuffle(_baseDeck, new Random(_seed));
+        Collections.shuffle(_baseDeck);
         int numCards = 42;
         for (int i = 0; i <= 4; i++) {
             int x = 0;
