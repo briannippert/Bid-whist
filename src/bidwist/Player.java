@@ -19,6 +19,7 @@ public class Player {
     int _bid;
     boolean _dealer;
     Card.Suit _trump = null;
+    Card cardPlayed;
 
     /**
      * Constructor for the player class
