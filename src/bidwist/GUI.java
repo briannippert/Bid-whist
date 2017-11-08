@@ -145,6 +145,7 @@ public class GUI extends javax.swing.JFrame {
         btnPass.setVisible(true);
         int p3Bid = _players.get(3).bid();
         System.out.println("Player 3 Bid: " + p3Bid);
+//        _players.get(0).
     }
 
     /**
