@@ -45,7 +45,7 @@ public class Player {
     public void turnOver() {
         for (Card c : _hand) {
             c.setFaceUp(true);
-
+            _parent.setComponentZOrder(c, 0);
         }
     }
 
@@ -53,10 +53,15 @@ public class Player {
         int offX = offsetX;
         int offY = offsetY;
         for (Card c : _hand) {
+//            int xpos = startX + offX;
+//            int ypos = startY + offY;
+//            System.out.println("X Position: " +xpos);
+//            System.out.println("Y Position: " +ypos);
             c.setLocation(startX + offX, startY + offY);
             offX += offsetX;
             offY += offsetY;
-            _parent.setComponentZOrder(c,0);
+            //_parent.setComponentZOrder(c, 0);
+            
         }
     }
 
