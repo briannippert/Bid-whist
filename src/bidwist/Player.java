@@ -5,6 +5,7 @@
  */
 package bidwist;
 
+import java.awt.Container;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,12 +17,14 @@ import java.util.logging.Logger;
 public class Player {
 
     ArrayList<Card> _hand;
+    Container _parent;
     int _bid;
     boolean _dealer;
 
-    public Player(ArrayList hand) {
+    public Player(ArrayList hand, Container parent) {
         _hand = hand;
         _dealer = false;
+        _parent = parent;
 
     }
 
@@ -53,7 +56,7 @@ public class Player {
             c.setLocation(startX + offX, startY + offY);
             offX += offsetX;
             offY += offsetY;
-            System.out.println("Card Location Set: X:" + (startX + offX) + " Y:" + (startY + offY));
+        //    System.out.println("Card Location Set: X:" + (startX + offX) + " Y:" + (startY + offY));
             c.repaint();
         }
     }
