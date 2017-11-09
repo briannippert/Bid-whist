@@ -51,7 +51,27 @@ public class Card extends JLabel implements Comparable<Card>, MouseListener {
      * enum Suit used for the suit of a card.
      */
     public static enum Suit {
-        CLUBS, DIAMONDS, HEARTS, SPADES, JOKER
+
+        /**
+         *
+         */
+        CLUBS,
+        /**
+         *
+         */
+        DIAMONDS,
+        /**
+         *
+         */
+        HEARTS,
+        /**
+         *
+         */
+        SPADES,
+        /**
+         *
+         */
+        JOKER
     }
 
     // -------------------- Rank enum definition -----------------------
@@ -60,15 +80,77 @@ public class Card extends JLabel implements Comparable<Card>, MouseListener {
      */
     public enum Rank // symbolic names for the 13 cards
     {
-        A_LO, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN,
-        JACK, QUEEN, KING, A_HI, LITTLE_JOKER, BIG_JOKER
+
+        /**
+         *
+         */
+        A_LO,
+        /**
+         *
+         */
+        TWO,
+        /**
+         *
+         */
+        THREE,
+        /**
+         *
+         */
+        FOUR,
+        /**
+         *
+         */
+        FIVE,
+        /**
+         *
+         */
+        SIX,
+        /**
+         *
+         */
+        SEVEN,
+        /**
+         *
+         */
+        EIGHT,
+        /**
+         *
+         */
+        NINE,
+        /**
+         *
+         */
+        TEN,
+        /**
+         *
+         */
+        JACK,
+        /**
+         *
+         */
+        QUEEN,
+        /**
+         *
+         */
+        KING,
+        /**
+         *
+         */
+        A_HI,
+        /**
+         *
+         */
+        LITTLE_JOKER,
+        /**
+         *
+         */
+        BIG_JOKER
     };
 
     // -------------------------- instance variables -----------------
     private Rank rank = null;
     private Suit suit = null;
     private BufferedImage faceImage;
-   
     private boolean _faceUp = false;
     private ArrayList<MouseListener> _listeners = null;
 
@@ -156,6 +238,11 @@ public class Card extends JLabel implements Comparable<Card>, MouseListener {
 //
 //        faceImage = readCardImage(imageSource, cardFileName);
 //    }
+    /**
+     *
+     * @param x X location
+     * @param y Y Location
+     */
     public void SetLocation(int x, int y) {
         this.setLocation(x, y);
     }
@@ -175,7 +262,8 @@ public class Card extends JLabel implements Comparable<Card>, MouseListener {
 
     /**
      * returns true if the card is raised.
-     * @return 
+     *
+     * @return True if the card is in the raised state. 
      */
     public boolean getRaised() {
         if (_raised == true) {
@@ -337,6 +425,7 @@ public class Card extends JLabel implements Comparable<Card>, MouseListener {
     public Rank getRank() {
         return rank;
     }
+
     // -------------------- paintComponent ------------------------
     /**
      * paintComponent draws the card as either face up or face down.
@@ -450,7 +539,7 @@ public class Card extends JLabel implements Comparable<Card>, MouseListener {
      * one.
      *
      * @param o Card Card to be compared with.
-     * @return int <0 , ==, >0
+     * @return int if the card is greator or less than the given card.
      */
     public int compareTo(Card o) {
         if (this.rank == o.rank) {

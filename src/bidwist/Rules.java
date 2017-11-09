@@ -30,7 +30,8 @@ public class Rules {
      *
      * @param cards Arraylist Of Cards that have been played
      * @param trump Suit that Trump represents
-     * @return
+     * @param leadSuit suit that is led in for the hand
+     * @return winning card
      */
     public static Card analyzeTrick(ArrayList<Card> cards, Card.Suit trump, Card.Suit leadSuit) {
         ArrayList<Card> trumpCards = new ArrayList<Card>();
@@ -53,8 +54,10 @@ public class Rules {
 
     }
     
-    
-
+    /**
+     *
+     * @param args Agruements
+     */
     public static void main(String args[]) {
         //Analyze Trick Unit Testing.
         ArrayList<Card> cards = new ArrayList<Card>();

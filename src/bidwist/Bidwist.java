@@ -11,6 +11,9 @@ package bidwist;
  */
 public class Bidwist {
 
+    /**
+     *
+     */
     public Bidwist()
     {
      GUI ui = new GUI();  

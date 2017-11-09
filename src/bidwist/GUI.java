@@ -148,9 +148,9 @@ public class GUI extends javax.swing.JFrame {
      * Method for having all the players bid.
      */
     public void bid() {
-//        _players.get(2).turnOver();
-//        _players.get(1).turnOver();
-//        _players.get(0).turnOver();
+        _players.get(2).turnOver();
+        _players.get(1).turnOver();
+        _players.get(0).turnOver();
         btnBid.setVisible(true);
         sldBid.setVisible(true);
         btnPass.setVisible(true);
@@ -164,6 +164,9 @@ public class GUI extends javax.swing.JFrame {
 
     }
 
+    /**
+     *
+     */
     public void reDeal() {
         _deck = null;
         _baseDeck = null;
@@ -172,6 +175,9 @@ public class GUI extends javax.swing.JFrame {
         deal();
         createPlayers();
         _players.get(3).orderCards();
+        _players.get(2).orderCards();
+        _players.get(1).orderCards();
+        _players.get(0).orderCards();
         startGame();
     }
 
@@ -305,6 +311,9 @@ public class GUI extends javax.swing.JFrame {
         deal();
         createPlayers();
         _players.get(3).orderCards();
+        _players.get(2).orderCards();
+        _players.get(1).orderCards();
+        _players.get(0).orderCards();
         startGame();
 
         //  validate();
@@ -368,6 +377,9 @@ public class GUI extends javax.swing.JFrame {
 
     }
 
+    /**
+     *
+     */
     public class CardListener extends MouseAdapter {
 
         // --------------------- mousePressed --------------------------

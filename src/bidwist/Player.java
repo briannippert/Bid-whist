@@ -37,7 +37,6 @@ public class Player {
     /**
      * Returns the players bid at the begining of the game
      *
-     * @return
      */
     public void bid() {
         int points = 0, hearts = 0, clubs = 0, spades = 0, diamonds = 0, jokers = 0;
@@ -92,6 +91,7 @@ public class Player {
     /**
      * Returns the card that the player will play. Probably will need input
      *
+     * @param hasBeenPlayed
      * @return
      */
     public Card play(ArrayList<Card> hasBeenPlayed) {
