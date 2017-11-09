@@ -45,13 +45,15 @@ public class Rules {
         }
         if (trumpCards.size() > 0) {
             Collections.sort(trumpCards);
-            return trumpCards.get(0);
+            return trumpCards.get(trumpCards.size()-1);
         } else {
             Collections.sort(leadSuitCards);
-            return (leadSuitCards.get(0));
+            return (leadSuitCards.get(leadSuitCards.size()-1));
         }
 
     }
+    
+    
 
     public static void main(String args[]) {
         //Analyze Trick Unit Testing.

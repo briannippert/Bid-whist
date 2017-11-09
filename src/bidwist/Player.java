@@ -19,7 +19,7 @@ public class Player {
     int _bid;
     boolean _dealer;
     Card.Suit _trump = null;
-    Card cardPlayed;
+    Card _cardPlayed;
 
     /**
      * Constructor for the player class
@@ -39,7 +39,7 @@ public class Player {
      *
      * @return
      */
-    public int bid() {
+    public void bid() {
         int points = 0, hearts = 0, clubs = 0, spades = 0, diamonds = 0, jokers = 0;
         int spadesCount = 0, diamondsCount = 0, heartsCount = 0, clubsCount = 0, jokersCount = 0;
         for (Card c : _hand) {
@@ -83,9 +83,9 @@ public class Player {
         }
         points = (clubs + hearts + spades + diamonds + jokers) / 9;
         if (points < 4) {
-            return 0;
+            _bid = 0;
         } else {
-            return points;
+            _bid = points;
         }
     }
 
@@ -239,4 +239,18 @@ public class Player {
         return _trump;
     }
 
+    /**
+     * returns true if the player just played the card passed to it.
+     *
+     * @param c Card to check if the player played
+     * @return true/false
+     */
+    public boolean playedCard(Card c) {
+        if (c == _cardPlayed) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
 }

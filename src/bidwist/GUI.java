@@ -154,14 +154,11 @@ public class GUI extends javax.swing.JFrame {
         btnBid.setVisible(true);
         sldBid.setVisible(true);
         btnPass.setVisible(true);
-        int p3Bid = _players.get(3).bid();
-        int p0Bid = _players.get(0).bid();
-        int p1Bid = _players.get(1).bid();
-        int p2Bid = _players.get(2).bid();
-        System.out.println("Player 1 Bid: " + p0Bid);
-        System.out.println("Player 2 Bid: " + p1Bid);
-        System.out.println("Player 3 Bid: " + p2Bid);
-        System.out.println("Player 4 Bid: " + p3Bid);
+        _players.get(3).bid();
+        _players.get(0).bid();
+        _players.get(1).bid();
+        _players.get(2).bid();
+
     }
 
     /**
