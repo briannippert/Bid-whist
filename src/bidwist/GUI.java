@@ -140,12 +140,19 @@ public class GUI extends javax.swing.JFrame {
         _players.get(2).setLocationOffset(10, 60, 50, 0);
         _players.get(3).setLocationOffset(10, 540, 50, 0);
         _players.get(3).turnOver();
+        bid();
+//        _players.get(0).
+    }
+
+    /**
+     * Method for having all the players bid.
+     */
+    public void bid() {
         btnBid.setVisible(true);
         sldBid.setVisible(true);
         btnPass.setVisible(true);
         int p3Bid = _players.get(3).bid();
         System.out.println("Player 3 Bid: " + p3Bid);
-//        _players.get(0).
     }
 
     /**
