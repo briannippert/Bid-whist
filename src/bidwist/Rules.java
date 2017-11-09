@@ -17,6 +17,7 @@
 package bidwist;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  *
@@ -24,15 +25,62 @@ import java.util.ArrayList;
  */
 public class Rules {
 
-    
     /**
-     * Analyzes 4 cards to determine the winner. 
+     * Analyzes 4 cards to determine the winner.
+     *
      * @param cards Arraylist Of Cards that have been played
      * @param trump Suit that Trump represents
-     * @return 
+     * @return
      */
-    public static Card analyzeTrick(ArrayList<Card> cards, Card.Suit trump) {
-        
-        return null;
+    public static Card analyzeTrick(ArrayList<Card> cards, Card.Suit trump, Card.Suit leadSuit) {
+        ArrayList<Card> trumpCards = new ArrayList<Card>();
+        ArrayList<Card> leadSuitCards = new ArrayList<Card>();
+        for (Card card : cards) {
+            if (card.getSuit() == trump || card.getSuit() == Card.Suit.JOKER) {
+                trumpCards.add(card);
+            }
+            if (card.getSuit() == leadSuit) {
+                leadSuitCards.add(card);
+            }
+        }
+        if (trumpCards.size() > 0) {
+            Collections.sort(trumpCards);
+            return trumpCards.get(0);
+        } else {
+            Collections.sort(leadSuitCards);
+            return (leadSuitCards.get(0));
+        }
+
+    }
+
+    public static void main(String args[]) {
+        //Analyze Trick Unit Testing.
+        ArrayList<Card> cards = new ArrayList<Card>();
+        Card c1 = new Card(Card.Rank.BIG_JOKER, Card.Suit.JOKER);
+        Card c2 = new Card(Card.Rank.EIGHT, Card.Suit.HEARTS);
+        Card c3 = new Card(Card.Rank.KING, Card.Suit.HEARTS);
+        Card c4 = new Card(Card.Rank.TWO, Card.Suit.SPADES);
+        Card c5 = new Card(Card.Rank.QUEEN, Card.Suit.DIAMONDS);
+        Card c6 = new Card(Card.Rank.JACK, Card.Suit.CLUBS);
+        Card c7 = new Card(Card.Rank.FOUR, Card.Suit.CLUBS);
+        Card c8 = new Card(Card.Rank.A_HI, Card.Suit.SPADES);
+        cards.add(c1);
+        cards.add(c2);
+        cards.add(c3);
+        cards.add(c4);
+        Card winner = Rules.analyzeTrick(cards, Card.Suit.HEARTS, Card.Suit.HEARTS);
+        System.out.println("Big Joker Should be the winner");
+        System.out.println(winner.getRank() + " " + winner.getSuit() + " is the Winning Card");
+        cards.clear();
+        cards.add(c5);
+        cards.add(c6);
+        cards.add(c7);
+        cards.add(c8);
+        winner = Rules.analyzeTrick(cards, Card.Suit.HEARTS, Card.Suit.DIAMONDS);
+        System.out.println("Queen Of Diamonds should be the winner");
+        System.out.println(winner.getRank() + " " + winner.getSuit() + " is the Winning Card");
+        winner = Rules.analyzeTrick(cards, Card.Suit.CLUBS, Card.Suit.DIAMONDS);
+        System.out.println("Jack of Clubs should be the winner");
+        System.out.println(winner.getRank() + " " + winner.getSuit() + " is the Winning Card");
     }
 }
