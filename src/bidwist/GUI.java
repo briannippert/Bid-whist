@@ -148,17 +148,31 @@ public class GUI extends javax.swing.JFrame {
      * Method for having all the players bid.
      */
     public void bid() {
-        _players.get(2).turnOver();
-        _players.get(1).turnOver();
-        _players.get(0).turnOver();
+//        _players.get(2).turnOver();
+//        _players.get(1).turnOver();
+//        _players.get(0).turnOver();
         btnBid.setVisible(true);
         sldBid.setVisible(true);
         btnPass.setVisible(true);
-        _players.get(3).bid();
+        _players.get(3).setDealer(true);
         _players.get(0).bid();
         _players.get(1).bid();
         _players.get(2).bid();
+        for (Player player : _players) {
+            System.out.println(player.getBid());
+        }
 
+    }
+
+    public void reDeal() {
+        _deck = null;
+        _baseDeck = null;
+        _players = null;
+        _kitty = null;
+        deal();
+        createPlayers();
+        _players.get(3).orderCards();
+        startGame();
     }
 
     /**
@@ -196,8 +210,18 @@ public class GUI extends javax.swing.JFrame {
         sldBid.setValue(4);
 
         btnBid.setText("Bid");
+        btnBid.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBidActionPerformed(evt);
+            }
+        });
 
         btnPass.setText("Pass");
+        btnPass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPassActionPerformed(evt);
+            }
+        });
 
         lblPlayer1.setText("jLabel1");
 
@@ -287,6 +311,18 @@ public class GUI extends javax.swing.JFrame {
         //   repaint();
 
     }//GEN-LAST:event_menuStartGameActionPerformed
+
+    private void btnBidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBidActionPerformed
+
+        _players.get(3).setBid(sldBid.getValue());
+        System.out.println("You Bid a " + _players.get(3).getBid());
+    }//GEN-LAST:event_btnBidActionPerformed
+
+    private void btnPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPassActionPerformed
+        if (_players.get(3).getDealer() == true) {
+            reDeal();
+        }
+    }//GEN-LAST:event_btnPassActionPerformed
 
     /**
      * @param args the command line arguments

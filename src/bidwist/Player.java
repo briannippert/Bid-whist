@@ -253,4 +253,22 @@ public class Player {
         }
 
     }
+
+    /**
+     * Returns the bid
+     *
+     * @return int bid
+     */
+    public int getBid() {
+        return _bid;
+    }
+    
+    /**
+     * Sets players bid.
+     * @param bid 
+     */
+    public void setBid(int bid)
+    {
+        _bid = bid;
+    }
 }

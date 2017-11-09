@@ -133,11 +133,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Bid"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBidActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnPass">
       <Properties>
         <Property name="text" type="java.lang.String" value="Pass"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPassActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblPlayer1">
       <Properties>
