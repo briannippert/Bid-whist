@@ -32,6 +32,7 @@ public class Rules {
      * @return 
      */
     public static Card analyzeTrick(ArrayList<Card> cards, Card.Suit trump) {
+        
         return null;
     }
 }
