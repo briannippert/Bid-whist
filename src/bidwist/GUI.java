@@ -36,9 +36,6 @@ public class GUI extends javax.swing.JFrame {
         btnBid.setVisible(false);
         sldBid.setVisible(false);
         btnPass.setVisible(false);
-        lblPlayer1.setVisible(false);
-        lblPlayer2.setVisible(false);
-        lblPlayer3.setVisible(false);
         lblHelp.setVisible(false);
     }
 
@@ -199,6 +196,7 @@ public class GUI extends javax.swing.JFrame {
         lblPlayer2 = new javax.swing.JLabel();
         lblPlayer3 = new javax.swing.JLabel();
         lblHelp = new javax.swing.JLabel();
+        lblPlayer4 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         javax.swing.JMenuItem menuStartGame = new javax.swing.JMenuItem();
@@ -231,13 +229,15 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        lblPlayer1.setText("jLabel1");
+        lblPlayer1.setText("Player 2");
 
-        lblPlayer2.setText("jLabel2");
+        lblPlayer2.setText("Player 3");
 
-        lblPlayer3.setText("jLabel3");
+        lblPlayer3.setText("Player 1");
 
         lblHelp.setText("jLabel4");
+
+        lblPlayer4.setText("Player 4");
 
         jMenu1.setText("File");
 
@@ -263,9 +263,6 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(348, 348, 348)
-                        .addComponent(lblPlayer2))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(171, 171, 171)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblHelp)
@@ -273,7 +270,12 @@ public class GUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnBid, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnPass)))
+                        .addComponent(btnPass))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(348, 348, 348)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblPlayer4)
+                            .addComponent(lblPlayer2))))
                 .addContainerGap(241, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(126, 126, 126)
@@ -291,13 +293,15 @@ public class GUI extends javax.swing.JFrame {
                         .addComponent(lblPlayer1)
                         .addGap(155, 155, 155))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(99, 99, 99)
+                        .addGap(108, 108, 108)
                         .addComponent(lblPlayer2)
-                        .addGap(76, 76, 76)
+                        .addGap(67, 67, 67)
                         .addComponent(lblHelp)
                         .addGap(54, 54, 54)
                         .addComponent(lblPlayer3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+                        .addComponent(lblPlayer4)
+                        .addGap(32, 32, 32)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(sldBid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBid)
@@ -425,6 +429,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel lblPlayer1;
     private javax.swing.JLabel lblPlayer2;
     private javax.swing.JLabel lblPlayer3;
+    private javax.swing.JLabel lblPlayer4;
     private javax.swing.JSlider sldBid;
     // End of variables declaration//GEN-END:variables
 }
