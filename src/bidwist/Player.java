@@ -114,8 +114,9 @@ public class Player {
      * Sorts cards by suit then by rank in suit.
      */
     public void orderCards() {
-        ArrayList<Card> jokers, spades, hearts, clubs, diamonds, temp;
+        ArrayList<Card> jokers, spades, hearts, clubs, diamonds, temp, jokers2;
         jokers = new ArrayList<Card>();
+        jokers2 = new ArrayList<Card>();
         spades = new ArrayList<Card>();
         hearts = new ArrayList<Card>();
         clubs = new ArrayList<Card>();
@@ -140,10 +141,9 @@ public class Player {
         }
         for (Card c : jokers) {
             if (c.getRank() == Card.Rank.LITTLE_JOKER) {
-
+                jokers2.add(0, c);
             } else if (c.getRank() == Card.Rank.BIG_JOKER) {
-                jokers.add(0, c);
-                jokers.remove(c);
+                jokers2.add(0, c);
             }
         }
         Collections.sort(spades);
@@ -262,13 +262,13 @@ public class Player {
     public int getBid() {
         return _bid;
     }
-    
+
     /**
      * Sets players bid.
-     * @param bid 
+     *
+     * @param bid
      */
-    public void setBid(int bid)
-    {
+    public void setBid(int bid) {
         _bid = bid;
     }
 }

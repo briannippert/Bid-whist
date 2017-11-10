@@ -38,17 +38,17 @@ public class GUI extends javax.swing.JFrame {
         btnPass.setVisible(false);
         lblHelp.setVisible(false);
         setResizable(false);
+        _baseDeck = new ArrayList<Card>();
+        _deck = new ArrayList();
+        _kitty = new ArrayList();
+        _players = new ArrayList();
     }
 
     /**
      * Deals Cards to players.
      */
     public void deal() {
-
         int y = 0;
-        _baseDeck = new ArrayList<Card>();
-        _deck = new ArrayList();
-        _kitty = new ArrayList();
         for (Card.Suit suit : Card.Suit.values()) {
             for (Card.Rank rank : Card.Rank.values()) {
                 if (rank == Card.Rank.BIG_JOKER || rank == Card.Rank.LITTLE_JOKER || suit == Card.Suit.JOKER) {
@@ -99,15 +99,12 @@ public class GUI extends javax.swing.JFrame {
                 for (int k = 5; k >= 0; k--) {
                     tempDeck.add(_baseDeck.get(k));
                     _baseDeck.remove(k);
-
                 }
                 for (Card c : tempDeck) {
                     c.setLocation(x, y);
                     _kitty.add(c);
                     x += 50;
-
                 }
-
                 y += 100;
             }
         }
@@ -118,7 +115,7 @@ public class GUI extends javax.swing.JFrame {
      * Creates Players for the game and assigns them cards.
      */
     public void createPlayers() {
-        _players = new ArrayList();
+
         for (int i = 0; i < 4; i++) {
             Player p1 = new Player(_deck.get(i), this);
             _players.add(p1);
@@ -156,11 +153,10 @@ public class GUI extends javax.swing.JFrame {
         _players.get(0).bid();
         _players.get(1).bid();
         _players.get(2).bid();
-        System.out.println( "Player 1 Bid: " + _players.get(0).getBid());
-        System.out.println( "Player 2 Bid: " + _players.get(1).getBid());
-        System.out.println( "Player 3 Bid: " + _players.get(2).getBid());
-        System.out.println( "Player 4 Bid: " + _players.get(3).getBid());
-
+        System.out.println("Player 1 Bid: " + _players.get(0).getBid());
+        System.out.println("Player 2 Bid: " + _players.get(1).getBid());
+        System.out.println("Player 3 Bid: " + _players.get(2).getBid());
+        System.out.println("Player 4 Bid: " + _players.get(3).getBid());
 
     }
 
@@ -168,10 +164,10 @@ public class GUI extends javax.swing.JFrame {
      *
      */
     public void reDeal() {
-        _deck = null;
-        _baseDeck = null;
-        _players = null;
-        _kitty = null;
+        _deck.clear();
+        _baseDeck.clear();
+        _players.clear();
+        _kitty.clear();
         deal();
         createPlayers();
         _players.get(3).orderCards();
