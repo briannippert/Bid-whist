@@ -68,19 +68,19 @@ public class Player {
         System.out.println("Clubs: " + clubsCount + " Points: " + clubs);
         System.out.println("Hearts: " + heartsCount + " Points: " + hearts);
         System.out.println("Jokers: " + jokersCount + " Points: " + jokers);
-        if (clubsCount < 5) {
+        if (clubsCount < 4) {
             clubs = 0;
         }
-        if (diamondsCount < 5) {
+        if (diamondsCount < 4) {
             diamonds = 0;
         }
-        if (heartsCount < 5) {
+        if (heartsCount < 4) {
             hearts = 0;
         }
-        if (spades < 5) {
+        if (spades < 4) {
             spades = 0;
         }
-        points = (clubs + hearts + spades + diamonds + jokers) / 9;
+        points = (clubs + hearts + spades + diamonds + jokers) / 11;
         if (points < 4) {
             _bid = 0;
         } else {

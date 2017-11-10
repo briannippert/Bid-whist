@@ -158,9 +158,11 @@ public class GUI extends javax.swing.JFrame {
         _players.get(0).bid();
         _players.get(1).bid();
         _players.get(2).bid();
-        for (Player player : _players) {
-            System.out.println(player.getBid());
-        }
+        System.out.println( "Player 1 Bid: " + _players.get(0).getBid());
+        System.out.println( "Player 2 Bid: " + _players.get(1).getBid());
+        System.out.println( "Player 3 Bid: " + _players.get(2).getBid());
+        System.out.println( "Player 4 Bid: " + _players.get(3).getBid());
+
 
     }
 
