@@ -37,6 +37,7 @@ public class GUI extends javax.swing.JFrame {
         sldBid.setVisible(false);
         btnPass.setVisible(false);
         lblHelp.setVisible(false);
+        setResizable(false);
     }
 
     /**
