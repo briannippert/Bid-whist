@@ -11,6 +11,10 @@ dist/
 nbdist/
 .nb-gradle/
 
+# Eclipse Files
+.classpath
+.project
+
 # Log file
 *.log
 
