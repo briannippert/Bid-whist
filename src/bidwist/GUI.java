@@ -351,7 +351,7 @@ public class GUI extends javax.swing.JFrame {
         leader.orderCards();
         leader.setLocationOffset(10, 540, 35, 0);
         leader.turnOver();
-        btnDiscard.setVisible(false);
+
 
     }//GEN-LAST:event_btnBidActionPerformed
 
@@ -368,6 +368,7 @@ public class GUI extends javax.swing.JFrame {
             _players.get(3).orderCards();
             _players.get(3).setLocationOffset(10, 540, 50, 0);
             _players.get(3).turnOver();
+            btnDiscard.setVisible(false);
         } else {
             lblInstructions.setText("Please Select 6 Cards to Discard!");
         }
