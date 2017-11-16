@@ -63,11 +63,6 @@ public class Player {
                 jokers += 15;
             }
         }
-        System.out.println("Spades: " + spadesCount + " Points: " + spades);
-        System.out.println("Diamonds: " + diamondsCount + " Points: " + diamonds);
-        System.out.println("Clubs: " + clubsCount + " Points: " + clubs);
-        System.out.println("Hearts: " + heartsCount + " Points: " + hearts);
-        System.out.println("Jokers: " + jokersCount + " Points: " + jokers);
         if (clubsCount < 4) {
             clubs = 0;
         }
@@ -88,6 +83,30 @@ public class Player {
         }
     }
 
+    public int getRaisedCards() {
+        int count = 0;
+        for (Card card : _hand) {
+            if (card.getRaised() == true) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public void discard() {
+        ArrayList<Card> cardsToRemove = new ArrayList<Card>();
+        for (int i = 0; i < _hand.size(); i++) {
+            if (_hand.get(i).getRaised() == true) {
+                cardsToRemove.add(_hand.get(i));
+            }
+        }
+        for (Card c : cardsToRemove) {
+            _hand.remove(c);
+            c.SetLocation(-100, -100);
+        }
+
+    }
+
     /**
      * Returns the card that the player will play. Probably will need input
      *
@@ -96,6 +115,16 @@ public class Player {
      */
     public Card play(ArrayList<Card> hasBeenPlayed) {
         return null;
+    }
+
+    /**
+     * Adds the kitty to a players hand.
+     *
+     * @param kitty Arraylist
+     */
+    public void giveKitty(ArrayList<Card> kitty) {
+        _hand.addAll(kitty);
+        _parent.repaint();
     }
 
     /**

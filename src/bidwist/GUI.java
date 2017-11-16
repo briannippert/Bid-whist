@@ -37,6 +37,7 @@ public class GUI extends javax.swing.JFrame {
         sldBid.setVisible(false);
         btnPass.setVisible(false);
         lblHelp.setVisible(false);
+        btnDiscard.setVisible(false);
         setResizable(false);
         _baseDeck = new ArrayList<Card>();
         _deck = new ArrayList();
@@ -136,7 +137,6 @@ public class GUI extends javax.swing.JFrame {
         _players.get(3).setLocationOffset(10, 540, 50, 0);
         _players.get(3).turnOver();
         Player leader = bid();
-        
 //        _players.get(0).
     }
 
@@ -150,16 +150,7 @@ public class GUI extends javax.swing.JFrame {
         btnBid.setVisible(true);
         sldBid.setVisible(true);
         btnPass.setVisible(true);
-        _players.get(3).setDealer(true);
-        _players.get(0).bid();
-        _players.get(1).bid();
-        _players.get(2).bid();
-        
-        System.out.println("Player 1 Bid: " + _players.get(0).getBid());
-        System.out.println("Player 2 Bid: " + _players.get(1).getBid());
-        System.out.println("Player 3 Bid: " + _players.get(2).getBid());
-        System.out.println("Player 4 Bid: " + _players.get(3).getBid());
-
+        return null;
     }
 
     /**
@@ -195,7 +186,8 @@ public class GUI extends javax.swing.JFrame {
         lblPlayer2 = new javax.swing.JLabel();
         lblPlayer3 = new javax.swing.JLabel();
         lblHelp = new javax.swing.JLabel();
-        lblPlayer4 = new javax.swing.JLabel();
+        lblInstructions = new javax.swing.JLabel();
+        btnDiscard = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         javax.swing.JMenuItem menuStartGame = new javax.swing.JMenuItem();
@@ -236,7 +228,14 @@ public class GUI extends javax.swing.JFrame {
 
         lblHelp.setText("jLabel4");
 
-        lblPlayer4.setText("Player 4");
+        lblInstructions.setText("Player 4");
+
+        btnDiscard.setText("Discard");
+        btnDiscard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDiscardActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("File");
 
@@ -260,12 +259,18 @@ public class GUI extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(126, 126, 126)
+                .addComponent(lblPlayer1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblPlayer3)
+                .addGap(188, 188, 188))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(171, 171, 171)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblHelp)
-                            .addComponent(sldBid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(sldBid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45)
+                        .addComponent(lblHelp)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnBid, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -273,15 +278,12 @@ public class GUI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(348, 348, 348)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblPlayer4)
-                            .addComponent(lblPlayer2))))
-                .addContainerGap(241, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(126, 126, 126)
-                .addComponent(lblPlayer1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblPlayer3)
-                .addGap(188, 188, 188))
+                            .addComponent(lblInstructions)
+                            .addComponent(lblPlayer2)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(334, 334, 334)
+                        .addComponent(btnDiscard)))
+                .addContainerGap(162, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -298,9 +300,11 @@ public class GUI extends javax.swing.JFrame {
                         .addComponent(lblHelp)
                         .addGap(54, 54, 54)
                         .addComponent(lblPlayer3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
-                        .addComponent(lblPlayer4)
-                        .addGap(32, 32, 32)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                        .addComponent(lblInstructions)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDiscard)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(sldBid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBid)
@@ -328,8 +332,27 @@ public class GUI extends javax.swing.JFrame {
 
     private void btnBidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBidActionPerformed
 
+        _players.get(3).setDealer(true);
+        _players.get(0).bid();
+        _players.get(1).bid();
+        _players.get(2).bid();
+        System.out.println("Player 1 Bid: " + _players.get(0).getBid());
+        System.out.println("Player 2 Bid: " + _players.get(1).getBid());
+        System.out.println("Player 3 Bid: " + _players.get(2).getBid());
+        System.out.println("Player 4 Bid: " + _players.get(3).getBid());
         _players.get(3).setBid(sldBid.getValue());
         System.out.println("You Bid a " + _players.get(3).getBid());
+        btnBid.setVisible(false);
+        sldBid.setVisible(false);
+        btnPass.setVisible(false);
+        btnDiscard.setVisible(true);
+        Player leader = _players.get(3);
+        leader.giveKitty(_kitty);
+        leader.orderCards();
+        leader.setLocationOffset(10, 540, 35, 0);
+        leader.turnOver();
+        btnDiscard.setVisible(false);
+
     }//GEN-LAST:event_btnBidActionPerformed
 
     private void btnPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPassActionPerformed
@@ -337,6 +360,18 @@ public class GUI extends javax.swing.JFrame {
             reDeal();
         }
     }//GEN-LAST:event_btnPassActionPerformed
+
+    private void btnDiscardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDiscardActionPerformed
+
+        if (_players.get(3).getRaisedCards() == 6) {
+            _players.get(3).discard();
+            _players.get(3).orderCards();
+            _players.get(3).setLocationOffset(10, 540, 50, 0);
+            _players.get(3).turnOver();
+        } else {
+            lblInstructions.setText("Please Select 6 Cards to Discard!");
+        }
+    }//GEN-LAST:event_btnDiscardActionPerformed
 
     /**
      * @param args the command line arguments
@@ -395,7 +430,7 @@ public class GUI extends javax.swing.JFrame {
          */
         public void mousePressed(MouseEvent e) {
             handleCardPick(e);
-            
+
         }
     }
 // ------------------------- handleCardPick( MouseEvent )
@@ -421,15 +456,16 @@ public class GUI extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBid;
+    private javax.swing.JButton btnDiscard;
     private javax.swing.JButton btnPass;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JLabel lblHelp;
+    private javax.swing.JLabel lblInstructions;
     private javax.swing.JLabel lblPlayer1;
     private javax.swing.JLabel lblPlayer2;
     private javax.swing.JLabel lblPlayer3;
-    private javax.swing.JLabel lblPlayer4;
     private javax.swing.JSlider sldBid;
     // End of variables declaration//GEN-END:variables
 }
