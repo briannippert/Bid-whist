@@ -144,6 +144,7 @@ public class GUI extends javax.swing.JFrame {
      * Method for having all the players bid.
      */
     public Player bid() {
+         
         _players.get(2).turnOver();
         _players.get(1).turnOver();
         _players.get(0).turnOver();

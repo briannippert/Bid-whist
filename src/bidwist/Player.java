@@ -83,6 +83,10 @@ public class Player {
         }
     }
 
+    /**
+     * Returns the number of cards that are in the raised state
+     * @return raisedCards
+     */
     public int getRaisedCards() {
         int count = 0;
         for (Card card : _hand) {
@@ -93,6 +97,9 @@ public class Player {
         return count;
     }
 
+    /**
+     * Discards selected Cards.
+     */
     public void discard() {
         ArrayList<Card> cardsToRemove = new ArrayList<Card>();
         for (int i = 0; i < _hand.size(); i++) {
@@ -113,7 +120,8 @@ public class Player {
      * @param hasBeenPlayed
      * @return
      */
-    public Card play(ArrayList<Card> hasBeenPlayed) {
+    public Card play(ArrayList<Card> hasBeenPlayed, Card.Suit suit) {
+        
         return null;
     }
 
