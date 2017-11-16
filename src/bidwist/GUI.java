@@ -135,14 +135,15 @@ public class GUI extends javax.swing.JFrame {
         _players.get(2).setLocationOffset(10, 60, 50, 0);
         _players.get(3).setLocationOffset(10, 540, 50, 0);
         _players.get(3).turnOver();
-        bid();
+        Player leader = bid();
+        
 //        _players.get(0).
     }
 
     /**
      * Method for having all the players bid.
      */
-    public void bid() {
+    public Player bid() {
         _players.get(2).turnOver();
         _players.get(1).turnOver();
         _players.get(0).turnOver();
@@ -153,6 +154,7 @@ public class GUI extends javax.swing.JFrame {
         _players.get(0).bid();
         _players.get(1).bid();
         _players.get(2).bid();
+        
         System.out.println("Player 1 Bid: " + _players.get(0).getBid());
         System.out.println("Player 2 Bid: " + _players.get(1).getBid());
         System.out.println("Player 3 Bid: " + _players.get(2).getBid());
@@ -393,6 +395,7 @@ public class GUI extends javax.swing.JFrame {
          */
         public void mousePressed(MouseEvent e) {
             handleCardPick(e);
+            
         }
     }
 // ------------------------- handleCardPick( MouseEvent )
