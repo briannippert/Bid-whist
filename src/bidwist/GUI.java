@@ -23,7 +23,7 @@ public class GUI extends javax.swing.JFrame {
 
     CardListener _cardListener = new CardListener();
     int _seed = new Random(10000).nextInt();
-    ArrayList<ArrayList> _deck;
+    ArrayList<ArrayList<Card>> _deck;
     ArrayList<Card> _baseDeck;
     ArrayList<Player> _players;
     ArrayList<Card> _kitty;
@@ -40,9 +40,9 @@ public class GUI extends javax.swing.JFrame {
         btnDiscard.setVisible(false);
         setResizable(false);
         _baseDeck = new ArrayList<Card>();
-        _deck = new ArrayList();
-        _kitty = new ArrayList();
-        _players = new ArrayList();
+        _deck = new ArrayList<ArrayList<Card>>();
+        _kitty = new ArrayList<Card>();
+        _players = new ArrayList<Player>();
     }
 
     /**
@@ -78,7 +78,7 @@ public class GUI extends javax.swing.JFrame {
         for (int i = 0; i <= 4; i++) {
             int x = 0;
 
-            ArrayList<Card> tempDeck = new ArrayList();
+            ArrayList<Card> tempDeck = new ArrayList<Card>();
             if (i != 4) {
                 for (int j = _baseDeck.size() - 1; j >= numCards; j--) {
 
