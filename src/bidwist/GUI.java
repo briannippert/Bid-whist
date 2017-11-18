@@ -354,9 +354,9 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBidActionPerformed
 
     private void btnPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPassActionPerformed
-        if (_players.get(3).getDealer() == true) {
+     //   if (_players.get(3).getDealer() == true) {
             reDeal();
-        }
+     //   }
     }//GEN-LAST:event_btnPassActionPerformed
 
     private void btnDiscardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDiscardActionPerformed

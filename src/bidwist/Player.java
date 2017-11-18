@@ -13,7 +13,7 @@ import java.util.logging.Logger;
  * @author Brian
  */
 public class Player {
-
+    
     ArrayList<Card> _hand;
     Container _parent;
     int _bid;
@@ -22,6 +22,7 @@ public class Player {
     Card _cardPlayed;
     int trumpPlayed = 0;
     int trumpInHand = 0;
+    ArrayList<Card> _spades, _clubs, _diamonds, _hearts, _jokers;
 
     /**
      * Constructor for the player class
@@ -33,7 +34,12 @@ public class Player {
         _hand = hand;
         _dealer = false;
         _parent = parent;
-
+        _spades = new ArrayList<Card>();
+        _clubs = new ArrayList<Card>();
+        _diamonds = new ArrayList<Card>();
+        _hearts = new ArrayList<Card>();
+        _jokers = new ArrayList<Card>();
+        
     }
 
     /**
@@ -47,22 +53,27 @@ public class Player {
             if (c.getSuit() == Card.Suit.CLUBS) {
                 clubsCount++;
                 clubs += c.getRank().ordinal();
+                _clubs.add(c);
             }
             if (c.getSuit() == Card.Suit.DIAMONDS) {
                 diamondsCount++;
                 diamonds += c.getRank().ordinal();
+                _diamonds.add(c);
             }
             if (c.getSuit() == Card.Suit.HEARTS) {
                 heartsCount++;
                 hearts += c.getRank().ordinal();
+                _hearts.add(c);
             }
             if (c.getSuit() == Card.Suit.SPADES) {
                 spadesCount++;
                 spades = c.getRank().ordinal();
+                _spades.add(c);
             }
             if (c.getSuit() == Card.Suit.JOKER) {
                 jokersCount++;
                 jokers += 15;
+                _jokers.add(c);
             }
         }
         if (clubsCount < 4) {
@@ -87,6 +98,7 @@ public class Player {
 
     /**
      * Returns the number of cards that are in the raised state
+     *
      * @return raisedCards
      */
     public int getRaisedCards() {
@@ -113,7 +125,7 @@ public class Player {
             _hand.remove(c);
             c.SetLocation(-100, -100);
         }
-
+        
     }
 
     /**
@@ -123,28 +135,24 @@ public class Player {
      * @return
      */
     public Card play(ArrayList<Card> hasBeenPlayed, Card.Suit leadSuit) {
-        if(hasBeenPlayed == null && leadSuit == null)
-        {
-            if(_dealer == true)
-            {
-                if(trumpPlayed + trumpInHand != 12)
-                {
-                    
+        Collections.sort(hasBeenPlayed);
+        if (hasBeenPlayed == null && leadSuit == null) {
+            if (_dealer == true) {
+                if (trumpPlayed + trumpInHand != 12) {
+                    if (_jokers.size() != 0) {
+                        return (_jokers.get(0));
+                    }
+                } else {
+                   
                 }
-            }
-            else
-            {
+            } else if (hasBeenPlayed.get(0).getSuit() == _trump) {
                 
+            } else {
+                leadSuit = hasBeenPlayed.get(0).getSuit();
             }
-        }
-        if(hasBeenPlayed.get(0).getSuit() == _trump)
-        {
             
         }
-        else
-        {
-            leadSuit = hasBeenPlayed.get(0).getSuit();
-        }
+        
         return null;
     }
 
@@ -216,7 +224,7 @@ public class Player {
         _hand.addAll(hearts);
         _hand.addAll(clubs);
         _hand.addAll(diamonds);
-
+        
     }
 
     /**
@@ -244,7 +252,7 @@ public class Player {
             c.setLocation(startX + offX, startY + offY);
             offX += offsetX;
             offY += offsetY;
-
+            
         }
     }
 
@@ -278,7 +286,7 @@ public class Player {
         } else {
             return false;
         }
-
+        
     }
 
     /**
@@ -287,11 +295,9 @@ public class Player {
      * @param suit the suit that trump has been called in.
      */
     public void setTrump(Card.Suit suit) {
-        for(Card c: _hand)
-        {
-            if(c.getSuit() == suit)
-            {
-                trumpInHand ++;
+        for (Card c : _hand) {
+            if (c.getSuit() == suit) {
+                trumpInHand++;
             }
         }
         _trump = suit;
@@ -318,7 +324,7 @@ public class Player {
         } else {
             return false;
         }
-
+        
     }
 
     /**
