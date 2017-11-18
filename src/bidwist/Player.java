@@ -20,6 +20,8 @@ public class Player {
     boolean _dealer;
     Card.Suit _trump = null;
     Card _cardPlayed;
+    int trumpPlayed = 0;
+    int trumpInHand = 0;
 
     /**
      * Constructor for the player class
@@ -120,8 +122,29 @@ public class Player {
      * @param hasBeenPlayed
      * @return
      */
-    public Card play(ArrayList<Card> hasBeenPlayed, Card.Suit suit) {
-        
+    public Card play(ArrayList<Card> hasBeenPlayed, Card.Suit leadSuit) {
+        if(hasBeenPlayed == null && leadSuit == null)
+        {
+            if(_dealer == true)
+            {
+                if(trumpPlayed + trumpInHand != 12)
+                {
+                    
+                }
+            }
+            else
+            {
+                
+            }
+        }
+        if(hasBeenPlayed.get(0).getSuit() == _trump)
+        {
+            
+        }
+        else
+        {
+            leadSuit = hasBeenPlayed.get(0).getSuit();
+        }
         return null;
     }
 
@@ -264,6 +287,13 @@ public class Player {
      * @param suit the suit that trump has been called in.
      */
     public void setTrump(Card.Suit suit) {
+        for(Card c: _hand)
+        {
+            if(c.getSuit() == suit)
+            {
+                trumpInHand ++;
+            }
+        }
         _trump = suit;
     }
 
