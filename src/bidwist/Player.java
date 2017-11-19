@@ -142,6 +142,11 @@ public class Player {
                     if (_jokers.size() != 0) {
                         return (_jokers.get(0));
                     }
+                    else
+                    {
+                        return(null);
+                    }
+                     
                 } else {
                    
                 }
