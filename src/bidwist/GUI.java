@@ -20,7 +20,7 @@ import java.util.Set;
  * @author Brian
  */
 public class GUI extends javax.swing.JFrame {
-
+    
     CardListener _cardListener = new CardListener();
     int _seed = new Random(10000).nextInt();
     ArrayList<ArrayList> _deck;
@@ -36,8 +36,9 @@ public class GUI extends javax.swing.JFrame {
         btnBid.setVisible(false);
         sldBid.setVisible(false);
         btnPass.setVisible(false);
-        lblHelp.setVisible(false);
         btnDiscard.setVisible(false);
+        btnPlay.setVisible((false));
+        btnPlay.setLocation(btnBid.getLocation());
         setResizable(false);
         _baseDeck = new ArrayList<Card>();
         _deck = new ArrayList();
@@ -59,9 +60,9 @@ public class GUI extends javax.swing.JFrame {
                     Card card = new Card(rank, suit);
                     card.addListener((MouseListener) _cardListener);
                     _baseDeck.add(0, card);
-
+                    
                     this.add(card);
-
+                    
                 }
             }
         }
@@ -77,26 +78,26 @@ public class GUI extends javax.swing.JFrame {
         int numCards = 42;
         for (int i = 0; i <= 4; i++) {
             int x = 0;
-
+            
             ArrayList<Card> tempDeck = new ArrayList();
             if (i != 4) {
                 for (int j = _baseDeck.size() - 1; j >= numCards; j--) {
-
+                    
                     tempDeck.add(_baseDeck.get(j));
                     _baseDeck.remove(j);
-
+                    
                 }
                 _deck.add(tempDeck);
                 for (Card c : tempDeck) {
                     c.setLocation(x, y);
-
+                    
                     x += 50;
-
+                    
                 }
                 y += 100;
                 numCards -= 12;
             } else {
-
+                
                 for (int k = 5; k >= 0; k--) {
                     tempDeck.add(_baseDeck.get(k));
                     _baseDeck.remove(k);
@@ -109,19 +110,19 @@ public class GUI extends javax.swing.JFrame {
                 y += 100;
             }
         }
-
+        
     }
 
     /**
      * Creates Players for the game and assigns them cards.
      */
     public void createPlayers() {
-
+        
         for (int i = 0; i < 4; i++) {
             Player p1 = new Player(_deck.get(i), this);
             _players.add(p1);
         }
-
+        
     }
 
     /**
@@ -144,7 +145,7 @@ public class GUI extends javax.swing.JFrame {
      * Method for having all the players bid.
      */
     public Player bid() {
-
+        
         _players.get(2).turnOver();
         _players.get(1).turnOver();
         _players.get(0).turnOver();
@@ -186,9 +187,9 @@ public class GUI extends javax.swing.JFrame {
         lblPlayer1 = new javax.swing.JLabel();
         lblPlayer2 = new javax.swing.JLabel();
         lblPlayer3 = new javax.swing.JLabel();
-        lblHelp = new javax.swing.JLabel();
         lblInstructions = new javax.swing.JLabel();
         btnDiscard = new javax.swing.JButton();
+        btnPlay = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         javax.swing.JMenuItem menuStartGame = new javax.swing.JMenuItem();
@@ -227,14 +228,19 @@ public class GUI extends javax.swing.JFrame {
 
         lblPlayer3.setText("Player 1");
 
-        lblHelp.setText("jLabel4");
-
         lblInstructions.setText("Player 4");
 
         btnDiscard.setText("Discard");
         btnDiscard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDiscardActionPerformed(evt);
+            }
+        });
+
+        btnPlay.setText("Play");
+        btnPlay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPlayActionPerformed(evt);
             }
         });
 
@@ -264,27 +270,30 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(lblPlayer1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblPlayer3)
-                .addGap(188, 188, 188))
+                .addGap(189, 189, 189))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(171, 171, 171)
-                        .addComponent(sldBid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45)
-                        .addComponent(lblHelp)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnBid, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnPass))
+                        .addGap(176, 176, 176)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(sldBid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnBid, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnPass))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(157, 157, 157)
+                                .addComponent(btnDiscard))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(342, 342, 342)
+                        .addComponent(btnPlay))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(348, 348, 348)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblInstructions)
-                            .addComponent(lblPlayer2)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(334, 334, 334)
-                        .addComponent(btnDiscard)))
-                .addContainerGap(162, Short.MAX_VALUE))
+                            .addComponent(lblPlayer2))))
+                .addContainerGap(236, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -292,25 +301,25 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblPlayer1)
-                        .addGap(155, 155, 155))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblPlayer1)
+                            .addComponent(lblPlayer3))
+                        .addGap(209, 209, 209))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(108, 108, 108)
                         .addComponent(lblPlayer2)
-                        .addGap(67, 67, 67)
-                        .addComponent(lblHelp)
-                        .addGap(54, 54, 54)
-                        .addComponent(lblPlayer3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 210, Short.MAX_VALUE)
                         .addComponent(lblInstructions)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnDiscard)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(sldBid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBid)
-                    .addComponent(btnPass))
-                .addGap(131, 131, 131))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(sldBid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnBid)
+                            .addComponent(btnPass))
+                        .addGap(26, 26, 26)))
+                .addComponent(btnPlay)
+                .addGap(112, 112, 112))
         );
 
         pack();
@@ -329,7 +338,7 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_menuStartGameActionPerformed
 
     private void btnBidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBidActionPerformed
-
+        
         _players.get(3).setDealer(true);
         _players.get(0).bid();
         _players.get(1).bid();
@@ -349,28 +358,35 @@ public class GUI extends javax.swing.JFrame {
         leader.orderCards();
         leader.setLocationOffset(10, 540, 35, 0);
         leader.turnOver();
-
+        
 
     }//GEN-LAST:event_btnBidActionPerformed
 
     private void btnPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPassActionPerformed
-     //   if (_players.get(3).getDealer() == true) {
-            reDeal();
-     //   }
+        //   if (_players.get(3).getDealer() == true) {
+        reDeal();
+        //   }
     }//GEN-LAST:event_btnPassActionPerformed
 
     private void btnDiscardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDiscardActionPerformed
-
+        
         if (_players.get(3).getRaisedCards() == 6) {
             _players.get(3).discard();
             _players.get(3).orderCards();
             _players.get(3).setLocationOffset(10, 540, 50, 0);
             _players.get(3).turnOver();
             btnDiscard.setVisible(false);
+            btnPlay.setLocation(btnDiscard.getLocation());
+            btnPlay.setVisible(true);
+            lblInstructions.setText("Player 4");
         } else {
             lblInstructions.setText("Please Select 6 Cards to Discard!");
         }
     }//GEN-LAST:event_btnDiscardActionPerformed
+
+    private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPlayActionPerformed
 
     /**
      * @param args the command line arguments
@@ -386,21 +402,21 @@ public class GUI extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-
+                    
                 }
             }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(GUI.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(GUI.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(GUI.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(GUI.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
@@ -413,7 +429,7 @@ public class GUI extends javax.swing.JFrame {
                 new GUI().setVisible(true);
             }
         });
-
+        
     }
 
     /**
@@ -429,7 +445,7 @@ public class GUI extends javax.swing.JFrame {
          */
         public void mousePressed(MouseEvent e) {
             handleCardPick(e);
-
+            
         }
     }
 // ------------------------- handleCardPick( MouseEvent )
@@ -451,16 +467,16 @@ public class GUI extends javax.swing.JFrame {
 //        System.out.println("Card Suite: " + card.getSuit().toString() + "\nCard Rank: " + card.getRank().toString());
         loc.x = loc.x + card.getX();;
         loc.y = loc.y + card.getY();
-
+        
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBid;
     private javax.swing.JButton btnDiscard;
     private javax.swing.JButton btnPass;
+    private javax.swing.JButton btnPlay;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JLabel lblHelp;
     private javax.swing.JLabel lblInstructions;
     private javax.swing.JLabel lblPlayer1;
     private javax.swing.JLabel lblPlayer2;
