@@ -27,6 +27,7 @@ public class GUI extends javax.swing.JFrame {
     ArrayList<Card> _baseDeck;
     ArrayList<Player> _players;
     ArrayList<Card> _kitty;
+    boolean _discard = false;
 
     /**
      * Creates new form GUI
@@ -38,7 +39,7 @@ public class GUI extends javax.swing.JFrame {
         btnPass.setVisible(false);
         btnDiscard.setVisible(false);
         btnPlay.setVisible((false));
-        btnPlay.setLocation(btnBid.getLocation());
+       // btnPlay.setLocation(btnBid.getLocation());
         setResizable(false);
         _baseDeck = new ArrayList<Card>();
         _deck = new ArrayList();
@@ -135,10 +136,9 @@ public class GUI extends javax.swing.JFrame {
         _players.get(0).setLocationOffset(630, 150, 0, 20);
         _players.get(1).setLocationOffset(20, 150, 0, 20);
         _players.get(2).setLocationOffset(10, 60, 50, 0);
-        _players.get(3).setLocationOffset(10, 540, 50, 0);
+        _players.get(3).setLocationOffset(10, 560, 50, 0);
         _players.get(3).turnOver();
         Player leader = bid();
-//        _players.get(0).
     }
 
     /**
@@ -343,16 +343,16 @@ public class GUI extends javax.swing.JFrame {
         _players.get(0).bid();
         _players.get(1).bid();
         _players.get(2).bid();
-        System.out.println("Player 1 Bid: " + _players.get(0).getBid());
-        System.out.println("Player 2 Bid: " + _players.get(1).getBid());
-        System.out.println("Player 3 Bid: " + _players.get(2).getBid());
-        System.out.println("Player 4 Bid: " + _players.get(3).getBid());
+        lblPlayer1.setText("Player 1 Bid: " + _players.get(0).getBid());
+        lblPlayer2.setText("Player 2 Bid: " + _players.get(1).getBid());
+        lblPlayer3.setText("Player 3 Bid: " + _players.get(2).getBid());
         _players.get(3).setBid(sldBid.getValue());
         System.out.println("You Bid a " + _players.get(3).getBid());
         btnBid.setVisible(false);
         sldBid.setVisible(false);
         btnPass.setVisible(false);
         btnDiscard.setVisible(true);
+        _discard = true;
         Player leader = _players.get(3);
         leader.giveKitty(_kitty);
         leader.orderCards();
@@ -373,10 +373,10 @@ public class GUI extends javax.swing.JFrame {
         if (_players.get(3).getRaisedCards() == 6) {
             _players.get(3).discard();
             _players.get(3).orderCards();
-            _players.get(3).setLocationOffset(10, 540, 50, 0);
+            _players.get(3).setLocationOffset(10, 560, 50, 0);
             _players.get(3).turnOver();
             btnDiscard.setVisible(false);
-            btnPlay.setLocation(btnDiscard.getLocation());
+            btnPlay.setLocation(btnDiscard.getLocation().x , btnDiscard.getLocation().y - 20);
             btnPlay.setVisible(true);
             lblInstructions.setText("Player 4");
         } else {
@@ -458,6 +458,10 @@ public class GUI extends javax.swing.JFrame {
      * @param e MouseEvent
      */
     private void handleCardPick(MouseEvent e) {
+        if(_discard == false)
+        {
+            return;
+        }
         //System.out.println("Handle Card Pick Called");
         Point loc = e.getPoint(); // get coordinates of mouse event in panel
         Card card = (Card) e.getSource();

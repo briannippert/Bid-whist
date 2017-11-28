@@ -76,19 +76,20 @@ public class Player {
                 _jokers.add(c);
             }
         }
-        if (clubsCount < 4) {
-            clubs = 0;
+        if (clubsCount < 5) {
+            clubs = clubs/3;
         }
-        if (diamondsCount < 4) {
-            diamonds = 0;
+        if (diamondsCount < 5) {
+            diamonds = diamonds/3;
         }
-        if (heartsCount < 4) {
-            hearts = 0;
+        if (heartsCount < 5) {
+            hearts = hearts/3;
         }
-        if (spades < 4) {
-            spades = 0;
+        if (spades < 5) {
+            spades = spades/3;
         }
-        points = (clubs + hearts + spades + diamonds + jokers) / 11;
+        points = (clubs + hearts + spades + diamonds + jokers) / 9;
+     
         if (points < 4) {
             _bid = 0;
         } else {
@@ -144,7 +145,9 @@ public class Player {
                     }
                     else
                     {
-                        return(null);
+                      ArrayList<Card> sortedHand = _hand;
+                      Collections.sort(sortedHand);
+                      return sortedHand.get(0);
                     }
                      
                 } else {
