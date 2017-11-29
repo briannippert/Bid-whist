@@ -20,7 +20,7 @@ import java.util.Set;
  * @author Brian
  */
 public class GUI extends javax.swing.JFrame {
-    
+
     CardListener _cardListener = new CardListener();
     int _seed = new Random(10000).nextInt();
     ArrayList<ArrayList> _deck;
@@ -28,6 +28,8 @@ public class GUI extends javax.swing.JFrame {
     ArrayList<Player> _players;
     ArrayList<Card> _kitty;
     boolean _discard = false;
+    int dealer = 1;
+    boolean _hasBid = false;
 
     /**
      * Creates new form GUI
@@ -39,7 +41,7 @@ public class GUI extends javax.swing.JFrame {
         btnPass.setVisible(false);
         btnDiscard.setVisible(false);
         btnPlay.setVisible((false));
-       // btnPlay.setLocation(btnBid.getLocation());
+        // btnPlay.setLocation(btnBid.getLocation());
         setResizable(false);
         _baseDeck = new ArrayList<Card>();
         _deck = new ArrayList();
@@ -61,9 +63,9 @@ public class GUI extends javax.swing.JFrame {
                     Card card = new Card(rank, suit);
                     card.addListener((MouseListener) _cardListener);
                     _baseDeck.add(0, card);
-                    
+
                     this.add(card);
-                    
+
                 }
             }
         }
@@ -79,26 +81,26 @@ public class GUI extends javax.swing.JFrame {
         int numCards = 42;
         for (int i = 0; i <= 4; i++) {
             int x = 0;
-            
+
             ArrayList<Card> tempDeck = new ArrayList();
             if (i != 4) {
                 for (int j = _baseDeck.size() - 1; j >= numCards; j--) {
-                    
+
                     tempDeck.add(_baseDeck.get(j));
                     _baseDeck.remove(j);
-                    
+
                 }
                 _deck.add(tempDeck);
                 for (Card c : tempDeck) {
                     c.setLocation(x, y);
-                    
+
                     x += 50;
-                    
+
                 }
                 y += 100;
                 numCards -= 12;
             } else {
-                
+
                 for (int k = 5; k >= 0; k--) {
                     tempDeck.add(_baseDeck.get(k));
                     _baseDeck.remove(k);
@@ -111,19 +113,19 @@ public class GUI extends javax.swing.JFrame {
                 y += 100;
             }
         }
-        
+
     }
 
     /**
      * Creates Players for the game and assigns them cards.
      */
     public void createPlayers() {
-        
+
         for (int i = 0; i < 4; i++) {
             Player p1 = new Player(_deck.get(i), this);
             _players.add(p1);
         }
-        
+
     }
 
     /**
@@ -145,13 +147,41 @@ public class GUI extends javax.swing.JFrame {
      * Method for having all the players bid.
      */
     public Player bid() {
-        
-        _players.get(2).turnOver();
-        _players.get(1).turnOver();
-        _players.get(0).turnOver();
-        btnBid.setVisible(true);
-        sldBid.setVisible(true);
-        btnPass.setVisible(true);
+        if (dealer == 3) {
+            _players.get(3).setDealer(true);
+            _players.get(0).bid();
+            _players.get(1).bid();
+            _players.get(2).bid();
+            lblPlayer1.setText("Player 1 Bid: " + _players.get(0).getBid());
+            lblPlayer2.setText("Player 2 Bid: " + _players.get(1).getBid());
+            lblPlayer3.setText("Player 3 Bid: " + _players.get(2).getBid());
+            //  _players.get(2).turnOver();
+            //   _players.get(1).turnOver();
+            //    _players.get(0).turnOver();
+            btnBid.setVisible(true);
+            sldBid.setVisible(true);
+            btnPass.setVisible(true);
+            dealer = 1;
+        } else if (dealer == 1) {
+            _players.get(1).setDealer(true);
+            _players.get(2).bid();
+            _players.get(0).bid();
+            lblPlayer2.setText("Player 2 Bid: " + _players.get(1).getBid());
+            lblPlayer3.setText("Player 3 Bid: " + _players.get(2).getBid());
+            _players.get(1).bid();
+            lblPlayer1.setText("Player 1 Bid: " + _players.get(0).getBid());
+            //  _players.get(2).turnOver();
+            //   _players.get(1).turnOver();
+            //    _players.get(0).turnOver();
+            btnBid.setVisible(true);
+            sldBid.setVisible(true);
+            btnPass.setVisible(true);
+        } else if (dealer == 2) {
+
+        } else if (dealer == 0) {
+
+        }
+
         return null;
     }
 
@@ -338,16 +368,16 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_menuStartGameActionPerformed
 
     private void btnBidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBidActionPerformed
-        
-        _players.get(3).setDealer(true);
-        _players.get(0).bid();
-        _players.get(1).bid();
-        _players.get(2).bid();
-        lblPlayer1.setText("Player 1 Bid: " + _players.get(0).getBid());
-        lblPlayer2.setText("Player 2 Bid: " + _players.get(1).getBid());
-        lblPlayer3.setText("Player 3 Bid: " + _players.get(2).getBid());
+
+//        _players.get(3).setDealer(true);
+//        _players.get(0).bid();
+//        _players.get(1).bid();
+//        _players.get(2).bid();
+//        lblPlayer1.setText("Player 1 Bid: " + _players.get(0).getBid());
+//        lblPlayer2.setText("Player 2 Bid: " + _players.get(1).getBid());
+//        lblPlayer3.setText("Player 3 Bid: " + _players.get(2).getBid());
         _players.get(3).setBid(sldBid.getValue());
-        System.out.println("You Bid a " + _players.get(3).getBid());
+        //  System.out.println("You Bid a " + _players.get(3).getBid());
         btnBid.setVisible(false);
         sldBid.setVisible(false);
         btnPass.setVisible(false);
@@ -358,7 +388,7 @@ public class GUI extends javax.swing.JFrame {
         leader.orderCards();
         leader.setLocationOffset(10, 540, 35, 0);
         leader.turnOver();
-        
+
 
     }//GEN-LAST:event_btnBidActionPerformed
 
@@ -369,14 +399,14 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPassActionPerformed
 
     private void btnDiscardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDiscardActionPerformed
-        
+
         if (_players.get(3).getRaisedCards() == 6) {
             _players.get(3).discard();
             _players.get(3).orderCards();
             _players.get(3).setLocationOffset(10, 560, 50, 0);
             _players.get(3).turnOver();
             btnDiscard.setVisible(false);
-            btnPlay.setLocation(btnDiscard.getLocation().x , btnDiscard.getLocation().y - 20);
+            btnPlay.setLocation(btnDiscard.getLocation().x, btnDiscard.getLocation().y - 20);
             btnPlay.setVisible(true);
             lblInstructions.setText("Player 4");
         } else {
@@ -402,21 +432,21 @@ public class GUI extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                    
+
                 }
             }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(GUI.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            
+
         } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(GUI.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            
+
         } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(GUI.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(GUI.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
@@ -429,7 +459,7 @@ public class GUI extends javax.swing.JFrame {
                 new GUI().setVisible(true);
             }
         });
-        
+
     }
 
     /**
@@ -445,7 +475,7 @@ public class GUI extends javax.swing.JFrame {
          */
         public void mousePressed(MouseEvent e) {
             handleCardPick(e);
-            
+
         }
     }
 // ------------------------- handleCardPick( MouseEvent )
@@ -458,8 +488,7 @@ public class GUI extends javax.swing.JFrame {
      * @param e MouseEvent
      */
     private void handleCardPick(MouseEvent e) {
-        if(_discard == false)
-        {
+        if (_discard == false) {
             return;
         }
         //System.out.println("Handle Card Pick Called");
@@ -471,7 +500,7 @@ public class GUI extends javax.swing.JFrame {
 //        System.out.println("Card Suite: " + card.getSuit().toString() + "\nCard Rank: " + card.getRank().toString());
         loc.x = loc.x + card.getX();;
         loc.y = loc.y + card.getY();
-        
+
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBid;
