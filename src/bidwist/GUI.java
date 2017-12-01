@@ -406,7 +406,7 @@ public class GUI extends javax.swing.JFrame {
             _players.get(3).setLocationOffset(10, 560, 50, 0);
             _players.get(3).turnOver();
             btnDiscard.setVisible(false);
-            btnPlay.setLocation(btnDiscard.getLocation().x, btnDiscard.getLocation().y - 20);
+            btnPlay.setLocation(btnDiscard.getLocation().x, btnDiscard.getLocation().y - 40);
             btnPlay.setVisible(true);
             lblInstructions.setText("Player 4");
         } else {
