@@ -14,6 +14,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -29,7 +31,7 @@ public class GUI extends javax.swing.JFrame {
     ArrayList<Card> _kitty;
     boolean _discard = false;
     int dealer = 1;
-    boolean _hasBid = false;
+    volatile boolean _hasBid = false;
 
     /**
      * Creates new form GUI
@@ -155,9 +157,6 @@ public class GUI extends javax.swing.JFrame {
             lblPlayer1.setText("Player 1 Bid: " + _players.get(0).getBid());
             lblPlayer2.setText("Player 2 Bid: " + _players.get(1).getBid());
             lblPlayer3.setText("Player 3 Bid: " + _players.get(2).getBid());
-            //  _players.get(2).turnOver();
-            //   _players.get(1).turnOver();
-            //    _players.get(0).turnOver();
             btnBid.setVisible(true);
             sldBid.setVisible(true);
             btnPass.setVisible(true);
@@ -168,11 +167,6 @@ public class GUI extends javax.swing.JFrame {
             _players.get(0).bid();
             lblPlayer2.setText("Player 2 Bid: " + _players.get(1).getBid());
             lblPlayer3.setText("Player 3 Bid: " + _players.get(2).getBid());
-            _players.get(1).bid();
-            lblPlayer1.setText("Player 1 Bid: " + _players.get(0).getBid());
-            //  _players.get(2).turnOver();
-            //   _players.get(1).turnOver();
-            //    _players.get(0).turnOver();
             btnBid.setVisible(true);
             sldBid.setVisible(true);
             btnPass.setVisible(true);
@@ -388,6 +382,7 @@ public class GUI extends javax.swing.JFrame {
         leader.orderCards();
         leader.setLocationOffset(10, 540, 35, 0);
         leader.turnOver();
+        _hasBid = true;
 
 
     }//GEN-LAST:event_btnBidActionPerformed
