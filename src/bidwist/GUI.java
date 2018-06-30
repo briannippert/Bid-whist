@@ -23,15 +23,15 @@ import java.util.logging.Logger;
  */
 public class GUI extends javax.swing.JFrame {
 
-    CardListener _cardListener = new CardListener();
+   private CardListener _cardListener = new CardListener();
     int _seed = new Random(10000).nextInt();
-    ArrayList<ArrayList> _deck;
-    ArrayList<Card> _baseDeck;
-    ArrayList<Player> _players;
-    ArrayList<Card> _kitty;
-    boolean _discard = false;
-    int dealer = 1;
-    volatile boolean _hasBid = false;
+    private ArrayList<ArrayList> _deck;
+    private ArrayList<Card> _baseDeck;
+    private ArrayList<Player> _players;
+    private ArrayList<Card> _kitty;
+    private boolean _discard = false;
+    private int dealer = 1;
+    private volatile boolean _hasBid = false;
 
     /**
      * Creates new form GUI
@@ -54,7 +54,7 @@ public class GUI extends javax.swing.JFrame {
     /**
      * Deals Cards to players.
      */
-    public void deal() {
+    private void deal() {
         int y = 0;
         for (Card.Suit suit : Card.Suit.values()) {
             for (Card.Rank rank : Card.Rank.values()) {
@@ -411,6 +411,7 @@ public class GUI extends javax.swing.JFrame {
 
     private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
         // TODO add your handling code here:
+
     }//GEN-LAST:event_btnPlayActionPerformed
 
     /**
